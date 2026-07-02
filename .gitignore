@@ -8,3 +8,4 @@ build/
 .settings/
 *.log
 data/
+src/main/resources/log/*.log

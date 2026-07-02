@@ -73,6 +73,14 @@ textarea { min-height: 260px; resize: vertical; line-height: 1.7; }
 .detail-actions { justify-content: space-between; padding-top: 22px; border-top: 1px solid #e2e8f0; }
 .danger-button { border-color: #fecaca; color: #b91c1c; }
 .danger-button:hover { background: #fef2f2; }
+.trace-filter-card { margin-bottom: 20px; padding: 22px; overflow: visible; }
+.trace-filter { display: grid; grid-template-columns: minmax(160px, 1.2fr) minmax(150px, 1.2fr) minmax(120px, .8fr) minmax(120px, .8fr) auto; align-items: end; gap: 14px; }
+.filter-field label { margin-bottom: 7px; }
+.refresh-button { height: 46px; white-space: nowrap; }
+.trace-error { margin: 16px 0 0; }
+.trace-time-column { width: 210px; }
+.trace-user-column { width: 170px; }
+.trace-action { color: #1e3a8a; font-family: Consolas, monospace; font-weight: 700; text-align: left !important; }
 
 @media (max-width: 720px) {
     .topbar { height: auto; padding: 18px 20px; align-items: flex-start; gap: 12px; }
@@ -84,4 +92,6 @@ textarea { min-height: 260px; resize: vertical; line-height: 1.7; }
     .primary-link { align-self: flex-end; }
     .form-card, .post-detail { padding: 22px; }
     .post-info { flex-direction: column; gap: 6px; }
+    .trace-filter { grid-template-columns: 1fr; }
+    .refresh-button { width: 100%; }
 }

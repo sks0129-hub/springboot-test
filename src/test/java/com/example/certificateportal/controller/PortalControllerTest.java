@@ -1,9 +1,11 @@
 package com.example.certificateportal.controller;
 
 import com.example.certificateportal.employee.EmployeeService;
+import com.example.certificateportal.trace.TraceLogService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -22,6 +24,9 @@ class PortalControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @MockBean
+    private TraceLogService traceLogService;
 
     @Test
     void loginPageIsDisplayed() throws Exception {
@@ -84,6 +89,7 @@ class PortalControllerTest {
                         .sessionAttr("specialAuth", true))
                 .andExpect(status().isOk())
                 .andExpect(content().string(org.hamcrest.Matchers.containsString("증명서 신청내역")))
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("행위추적로그")))
                 .andExpect(content().string(org.hamcrest.Matchers.not(
                         org.hamcrest.Matchers.containsString("href=\"/certificate/request\""))))
                 .andExpect(content().string(org.hamcrest.Matchers.not(
@@ -99,6 +105,8 @@ class PortalControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string(org.hamcrest.Matchers.containsString("증명서신청")))
                 .andExpect(content().string(org.hamcrest.Matchers.containsString("증명서발급")))
+                .andExpect(content().string(org.hamcrest.Matchers.not(
+                        org.hamcrest.Matchers.containsString("행위추적로그"))))
                 .andExpect(content().string(org.hamcrest.Matchers.not(
                         org.hamcrest.Matchers.containsString("href=\"/certificate/requests\""))));
     }

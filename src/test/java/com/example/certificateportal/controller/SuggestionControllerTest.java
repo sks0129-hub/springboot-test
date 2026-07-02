@@ -3,6 +3,7 @@ package com.example.certificateportal.controller;
 import com.example.certificateportal.suggestion.SuggestionCategory;
 import com.example.certificateportal.suggestion.SuggestionPost;
 import com.example.certificateportal.suggestion.SuggestionService;
+import com.example.certificateportal.trace.TraceLogService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -31,6 +32,9 @@ class SuggestionControllerTest {
 
     @MockBean
     private SuggestionService suggestionService;
+
+    @MockBean
+    private TraceLogService traceLogService;
 
     @Test
     void boardIsAvailableToBothUserAndAdministrator() throws Exception {
