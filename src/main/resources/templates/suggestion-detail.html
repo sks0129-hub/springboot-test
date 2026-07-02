@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${post.title + ' | 증명서 포털'}">게시글 | 증명서 포털</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header class="topbar">
+    <a class="brand" th:href="@{/main}">증명서 포털</a>
+    <div class="account">
+        <span><strong th:text="${session.loginUserName}">홍길동</strong> 님 환영합니다.</span>
+        <form th:action="@{/logout}" method="post"><button class="logout-button" type="submit">로그아웃</button></form>
+    </div>
+</header>
+<main class="page detail-page">
+    <section class="board-card post-detail">
+        <div class="post-meta">
+            <span class="category-badge" th:text="${post.category.displayName}">자유</span>
+            <span th:text="${'#' + post.id}">#1</span>
+        </div>
+        <h1 th:text="${post.title}">게시글 제목</h1>
+        <div class="post-info">
+            <span>작성자 <strong th:text="${post.authorName}">홍길동</strong></span>
+            <span th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}">2026-07-02 12:00</span>
+        </div>
+        <div class="post-content" th:text="${post.content}">게시글 내용</div>
+        <div class="detail-actions">
+            <a class="secondary-link" th:href="@{/suggestions}">목록</a>
+            <div class="manage-actions" th:if="${canManage}">
+                <a class="secondary-link" th:href="@{/suggestions/{id}/edit(id=${post.id})}">수정</a>
+                <form th:action="@{/suggestions/{id}/delete(id=${post.id})}" method="post"
+                      onsubmit="return confirm('게시글을 삭제하시겠습니까?');">
+                    <button class="danger-button" type="submit">삭제</button>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+</html>

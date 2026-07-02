@@ -18,6 +18,7 @@ public class PortalController {
     private static final String LOGIN_USER_ID = "loginUserId";
     private static final String LOGIN_USER_NAME = "loginUserName";
     private static final String LOGIN_USER = "loginUser";
+    private static final String SPECIAL_AUTH = "specialAuth";
     private final EmployeeService employeeService;
 
     public PortalController(EmployeeService employeeService) {
@@ -40,6 +41,7 @@ public class PortalController {
             session.setAttribute(LOGIN_USER_ID, employee.userId());
             session.setAttribute(LOGIN_USER_NAME, employee.name());
             session.setAttribute(LOGIN_USER, employee.name());
+            session.setAttribute(SPECIAL_AUTH, employee.specialAuth());
             return "redirect:/main";
         }
 
@@ -59,17 +61,17 @@ public class PortalController {
 
     @GetMapping("/certificate/request")
     public String certificateRequest(HttpSession session) {
-        return protectedPage(session, "certificate-request");
+        return userPage(session, "certificate-request");
     }
 
     @GetMapping("/certificate/issue")
     public String certificateIssue(HttpSession session) {
-        return protectedPage(session, "certificate-issue");
+        return userPage(session, "certificate-issue");
     }
 
-    @GetMapping("/suggestions")
-    public String suggestions(HttpSession session) {
-        return protectedPage(session, "suggestions");
+    @GetMapping("/certificate/requests")
+    public String certificateRequests(HttpSession session) {
+        return adminPage(session, "certificate-requests");
     }
 
     @PostMapping("/logout")
@@ -82,7 +84,25 @@ public class PortalController {
         return isLoggedIn(session) ? viewName : "redirect:/login";
     }
 
+    private String adminPage(HttpSession session, String viewName) {
+        if (!isLoggedIn(session)) {
+            return "redirect:/login";
+        }
+        return hasSpecialAuth(session) ? viewName : "redirect:/main";
+    }
+
+    private String userPage(HttpSession session, String viewName) {
+        if (!isLoggedIn(session)) {
+            return "redirect:/login";
+        }
+        return hasSpecialAuth(session) ? "redirect:/main" : viewName;
+    }
+
     private boolean isLoggedIn(HttpSession session) {
         return session.getAttribute(LOGIN_USER_ID) != null;
+    }
+
+    private boolean hasSpecialAuth(HttpSession session) {
+        return Boolean.TRUE.equals(session.getAttribute(SPECIAL_AUTH));
     }
 }

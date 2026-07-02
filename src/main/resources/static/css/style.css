@@ -15,7 +15,7 @@ body { margin: 0; min-height: 100vh; background: #f3f6fb; }
 .form-group { margin-bottom: 18px; }
 label { display: block; margin-bottom: 7px; font-weight: 700; font-size: 14px; }
 input { width: 100%; height: 46px; padding: 0 13px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 15px; }
-input:focus { outline: 3px solid #dbeafe; border-color: #2563eb; }
+input:focus, select:focus, textarea:focus { outline: 3px solid #dbeafe; border-color: #2563eb; }
 .primary-button { width: 100%; height: 48px; border: 0; border-radius: 8px; color: #fff; background: #2563eb; font-weight: 700; cursor: pointer; }
 .primary-button:hover { background: #1d4ed8; }
 .error { padding: 11px 13px; margin: 0 0 18px; border-radius: 8px; color: #b91c1c; background: #fef2f2; font-size: 14px; }
@@ -36,9 +36,52 @@ input:focus { outline: 3px solid #dbeafe; border-color: #2563eb; }
 .empty-card { min-height: 320px; padding: 32px; border-radius: 13px; background: #fff; border: 1px solid #e2e8f0; }
 .back-link { display: inline-block; margin-top: 24px; color: #2563eb; text-decoration: none; }
 
+.page-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; }
+.primary-link, .primary-action { display: inline-flex; align-items: center; justify-content: center; min-height: 42px; padding: 0 18px; border: 0; border-radius: 8px; color: #fff; background: #2563eb; font-size: 14px; font-weight: 700; text-decoration: none; cursor: pointer; }
+.primary-link:hover, .primary-action:hover { background: #1d4ed8; }
+.board-card { overflow: hidden; border: 1px solid #e2e8f0; border-radius: 13px; background: #fff; box-shadow: 0 5px 18px rgba(15, 23, 42, .04); }
+.board-table-wrap { overflow-x: auto; }
+.board-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.board-table th { padding: 15px 16px; border-bottom: 1px solid #cbd5e1; color: #475569; background: #f8fafc; text-align: center; white-space: nowrap; }
+.board-table td { padding: 16px; border-bottom: 1px solid #e2e8f0; text-align: center; }
+.board-table tbody tr:last-child td { border-bottom: 0; }
+.board-table tbody tr:hover { background: #f8fafc; }
+.board-table .title-cell { min-width: 240px; text-align: left; }
+.title-cell a { color: #1f2937; font-weight: 600; text-decoration: none; }
+.title-cell a:hover { color: #2563eb; text-decoration: underline; }
+.number-column { width: 90px; }
+.category-column { width: 110px; }
+.date-column { width: 170px; }
+.author-column { width: 120px; }
+.category-badge { display: inline-block; padding: 4px 9px; border-radius: 999px; color: #1d4ed8; background: #dbeafe; font-size: 12px; font-weight: 700; white-space: nowrap; }
+.empty-board { height: 180px; color: #64748b; }
+.form-page { width: min(760px, calc(100% - 40px)); }
+.form-card { padding: 30px; }
+select, textarea { width: 100%; padding: 12px 13px; border: 1px solid #cbd5e1; border-radius: 8px; color: #1f2937; background: #fff; font: inherit; }
+select { height: 46px; }
+textarea { min-height: 260px; resize: vertical; line-height: 1.7; }
+.form-actions, .detail-actions, .manage-actions { display: flex; align-items: center; gap: 10px; }
+.form-actions { justify-content: flex-end; margin-top: 28px; }
+.secondary-link, .danger-button { display: inline-flex; align-items: center; justify-content: center; min-height: 40px; padding: 0 16px; border: 1px solid #cbd5e1; border-radius: 8px; color: #334155; background: #fff; font-size: 14px; font-weight: 700; text-decoration: none; cursor: pointer; }
+.secondary-link:hover { background: #f8fafc; }
+.detail-page { width: min(860px, calc(100% - 40px)); }
+.post-detail { padding: 34px; }
+.post-meta { display: flex; align-items: center; gap: 10px; color: #64748b; font-size: 14px; }
+.post-detail h1 { margin: 18px 0 14px; font-size: 28px; }
+.post-info { display: flex; gap: 18px; padding-bottom: 24px; border-bottom: 1px solid #e2e8f0; color: #64748b; font-size: 14px; }
+.post-content { min-height: 260px; padding: 30px 0; line-height: 1.8; white-space: pre-wrap; overflow-wrap: anywhere; }
+.detail-actions { justify-content: space-between; padding-top: 22px; border-top: 1px solid #e2e8f0; }
+.danger-button { border-color: #fecaca; color: #b91c1c; }
+.danger-button:hover { background: #fef2f2; }
+
 @media (max-width: 720px) {
     .topbar { height: auto; padding: 18px 20px; align-items: flex-start; gap: 12px; }
     .account { align-items: flex-end; flex-direction: column; gap: 8px; }
     .page { margin-top: 34px; }
     .menu-grid { grid-template-columns: 1fr; }
+    .page-heading { align-items: stretch; flex-direction: column; margin-bottom: 22px; }
+    .page-heading .subtitle { margin-bottom: 0; }
+    .primary-link { align-self: flex-end; }
+    .form-card, .post-detail { padding: 22px; }
+    .post-info { flex-direction: column; gap: 6px; }
 }

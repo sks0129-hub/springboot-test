@@ -1,2 +1,56 @@
-<!DOCTYPE html><html lang="ko" xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>건의게시판</title><link rel="stylesheet" th:href="@{/css/style.css}"></head>
-<body><header class="topbar"><a class="brand" th:href="@{/main}">증명서 포털</a><div class="account"><span><strong th:text="${session.loginUser}">admin</strong> 님 환영합니다.</span><form th:action="@{/logout}" method="post"><button class="logout-button" type="submit">로그아웃</button></form></div></header><main class="page"><h1>건의게시판</h1><p class="subtitle">건의게시판 페이지입니다.</p><section class="empty-card"></section><a class="back-link" th:href="@{/main}">← 메인으로 돌아가기</a></main></body></html>
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>건의게시판 | 증명서 포털</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header class="topbar">
+    <a class="brand" th:href="@{/main}">증명서 포털</a>
+    <div class="account">
+        <span><strong th:text="${session.loginUserName}">홍길동</strong> 님 환영합니다.</span>
+        <form th:action="@{/logout}" method="post"><button class="logout-button" type="submit">로그아웃</button></form>
+    </div>
+</header>
+<main class="page">
+    <div class="page-heading">
+        <div>
+            <h1>건의게시판</h1>
+            <p class="subtitle">자유로운 의견과 서비스 건의를 남겨 주세요.</p>
+        </div>
+        <a class="primary-link" th:href="@{/suggestions/new}">게시글 쓰기</a>
+    </div>
+
+    <section class="board-card">
+        <div class="board-table-wrap">
+            <table class="board-table">
+                <thead>
+                <tr>
+                    <th class="number-column">작성번호</th>
+                    <th class="category-column">카테고리</th>
+                    <th>제목</th>
+                    <th class="date-column">글 작성시간</th>
+                    <th class="author-column">작성자</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="post : ${posts}">
+                    <td th:text="${post.id}">1</td>
+                    <td><span class="category-badge" th:text="${post.category.displayName}">자유</span></td>
+                    <td class="title-cell"><a th:href="@{/suggestions/{id}(id=${post.id})}" th:text="${post.title}">게시글 제목</a></td>
+                    <td th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}">2026-07-02 12:00</td>
+                    <td th:text="${post.authorName}">홍길동</td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(posts)}">
+                    <td class="empty-board" colspan="5">등록된 게시글이 없습니다.</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <a class="back-link" th:href="@{/main}">← 메인으로 돌아가기</a>
+</main>
+</body>
+</html>

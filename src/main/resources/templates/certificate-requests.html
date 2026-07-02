@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>증명서 신청내역 | 증명서 포털</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header class="topbar">
+    <a class="brand" th:href="@{/main}">증명서 포털</a>
+    <div class="account">
+        <span><strong th:text="${session.loginUserName}">admin</strong> 님 환영합니다.</span>
+        <form th:action="@{/logout}" method="post"><button class="logout-button" type="submit">로그아웃</button></form>
+    </div>
+</header>
+<main class="page">
+    <h1>증명서 신청내역</h1>
+    <p class="subtitle">관리자 전용 페이지입니다.</p>
+    <section class="empty-card"></section>
+    <a class="back-link" th:href="@{/main}">← 메인으로 돌아가기</a>
+</main>
+</body>
+</html>

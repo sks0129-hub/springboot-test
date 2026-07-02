@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${heading + ' | 증명서 포털'}">게시글 작성 | 증명서 포털</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header class="topbar">
+    <a class="brand" th:href="@{/main}">증명서 포털</a>
+    <div class="account">
+        <span><strong th:text="${session.loginUserName}">홍길동</strong> 님 환영합니다.</span>
+        <form th:action="@{/logout}" method="post"><button class="logout-button" type="submit">로그아웃</button></form>
+    </div>
+</header>
+<main class="page form-page">
+    <h1 th:text="${heading}">게시글 작성</h1>
+    <p class="subtitle">카테고리와 제목, 내용을 입력해 주세요.</p>
+    <section class="board-card form-card">
+        <p class="error" th:if="${error}" th:text="${error}"></p>
+        <form th:action="${formAction}" th:object="${form}" method="post">
+            <div class="form-group">
+                <label for="category">카테고리</label>
+                <select id="category" th:field="*{category}" required>
+                    <option th:each="category : ${categories}"
+                            th:value="${category.name()}"
+                            th:text="${category.displayName}">자유</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="title">제목</label>
+                <input id="title" th:field="*{title}" type="text" maxlength="100" required>
+            </div>
+            <div class="form-group">
+                <label for="content">내용</label>
+                <textarea id="content" th:field="*{content}" maxlength="5000" required></textarea>
+            </div>
+            <div class="form-actions">
+                <a class="secondary-link" th:href="@{/suggestions}">취소</a>
+                <button class="primary-action" type="submit">저장</button>
+            </div>
+        </form>
+    </section>
+</main>
+</body>
+</html>
