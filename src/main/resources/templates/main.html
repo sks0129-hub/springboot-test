@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>메인 | 증명서 포털</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header class="topbar">
+    <a class="brand" th:href="@{/main}">증명서 포털</a>
+    <div class="account">
+        <span><strong th:text="${session.loginUserName}">홍길동</strong> 님 환영합니다.</span>
+        <form th:action="@{/logout}" method="post"><button class="logout-button" type="submit">로그아웃</button></form>
+    </div>
+</header>
+<main class="page">
+    <h1>메인페이지</h1>
+    <p class="subtitle">이용하실 메뉴를 선택해 주세요.</p>
+    <nav class="menu-grid" aria-label="주요 메뉴">
+        <a class="menu-card" th:href="@{/certificate/request}"><h2>증명서신청</h2><p>필요한 증명서를 신청합니다.</p></a>
+        <a class="menu-card" th:href="@{/certificate/issue}"><h2>증명서발급</h2><p>신청한 증명서를 발급합니다.</p></a>
+        <a class="menu-card" th:href="@{/suggestions}"><h2>건의게시판</h2><p>서비스에 대한 의견을 남깁니다.</p></a>
+    </nav>
+</main>
+</body>
+</html>
